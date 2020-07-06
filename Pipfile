@@ -7,6 +7,9 @@ verify_ssl = true
 
 [packages]
 django = "*"
+postgres = "*"
+psycopg2 = "*"
+citipy = "*"
 
 [requires]
 python_version = "3.8"

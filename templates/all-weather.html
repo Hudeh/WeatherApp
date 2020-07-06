@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	{% include 'header.html' %}
+
+
+	<body>
+		
+		<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="index.html" class="branding">
+						<img src="{% static 'web/images/logo.png' %}" alt="" class="logo">
+						<div class="logo-type">
+							<h1 class="site-title">WeatherInfo</h1>
+						</div>
+					</a>
+
+					<!-- Default snippet for navigation -->
+					<div class="main-navigation">
+						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item"><a href="{% url 'weather' %}">Home</a></li>
+						</ul> <!-- .menu -->
+					</div> <!-- .main-navigation -->
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+			</div> <!-- .site-header -->
+
+			<main class="main-content">
+				<div class="container">
+					<div class="breadcrumb">
+						<a href="index.html">Home</a>
+						<span>All Weather</span>
+					</div>
+				</div>
+
+				<div class="fullwidth-block">
+					<div class="container">
+						<div class="row">
+					{% if weather_data %}
+						{% for weather in weather_data %}
+							<div class="col-md-6">
+								<div class="photo">
+									<div class="photo-preview photo-detail" data-bg-image="http://openweathermap.org/img/w/{{weather.icon}}.png"></div>
+									<div class="photo-details">
+										<h3 class="photo-title"><a href="#">{{weather.name}}</a></h3>
+										<p>{{weather.temp}}</p>
+										<p>{{weather.description}}</p>
+										<span><img src="{% static 'web/images/icon-umberella.png' %}" alt="">{{weather.humidity}}%</span>
+										<span><img src="{% static 'web/images/icon-wind.png' %}" alt="">{{weather.speed}} km/h</span>
+										<span><img src="{% static 'web/images/icon-compass.png' %}" alt="">{{weather.coordinate}}</span>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+				
+			</main> <!-- .main-content -->
+
+			{% include 'footer.html' %}
+		</div>
+		
+		<script src="{% static 'web/js/jquery-1.11.1.min.js' %}"></script>
+		<script src="{% static 'web/js/plugins.js' %}"></script>
+		<script src="{% static 'web/js/app.js' %}"></script>
+		
+	</body>
+
+</html>

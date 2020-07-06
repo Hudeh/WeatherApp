@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	{% include 'header.html' %}
+
+
+	<body>
+		
+		<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="{% url 'weather' %}" class="branding">
+						<img src="{% static 'web/images/logo.png' %}" alt="" class="logo">
+						<div class="logo-type">
+							<h1 class="site-title">WeatherInfo</h1>
+						</div>
+					</a>
+
+					<!-- Default snippet for navigation -->
+					<div class="main-navigation">
+						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item current-menu-item"><a href="{% url 'weather' %}">Home</a></li>
+							<li class="menu-item"><a href="{% url 'all-weather' %}">All</a></li>
+						</ul> <!-- .menu -->
+					</div> <!-- .main-navigation -->
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+			</div> <!-- .site-header -->
+
+			<div class="hero" data-bg-image="{% static 'web/images/banner.png' %}">
+				<div class="container">
+					<form action="{% url 'weather' %}" method="POST" class="find-location">
+						{% csrf_token %}
+						<input type="text" name="city" placeholder="Find your location...">
+						<input type="submit" value="Find">
+					</form>
+
+				</div>
+			</div>
+			<div class="forecast-table">
+				<div class="container">
+					<div class="forecast-container">
+						{% if data %}
+						<div class="today forecast">
+							<div class="forecast-header">
+								<div class="day">{{weekdays}}</div>
+								<div class="date">{{day}}</div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div class="location">{{data.name}}</div>
+								<div class="degree">
+									<div class="num">{{data.temp}}<sup>o</sup>C</div>
+									<div class="forecast-icon">
+										<img src="http://openweathermap.org/img/w/{{data.icon}}.png" alt="image" width=90>
+									</div>	
+								</div>
+								<div class="degree" style="text-align: center;"><div class="location">{{data.description}}</div></div>
+								<span><img src="{% static 'web/images/icon-umberella.png' %}" alt="">{{data.humidity}}%</span>
+								<span><img src="{% static 'web/images/icon-wind.png' %}" alt="">{{data.speed}} km/h</span>
+								<span><img src="{% static 'web/images/icon-compass.png' %}" alt="">{{data.coordinate}}</span>
+							</div>
+						</div>
+						{% else %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<main class="main-content">
+				<div class="fullwidth-block">
+					<div class="container">
+						
+					</div>
+				</div>
+
+				
+			</main> <!-- .main-content -->
+
+			{% include 'footer.html' %}
+		</div>
+		
+		<script src="{% static 'web/js/jquery-1.11.1.min.js' %}"></script>
+		<script src="{% static 'web/js/plugins.js' %}"></script>
+		<script src="{% static 'web/js/app.js' %}"></script>
+		
+	</body>
+
+</html>

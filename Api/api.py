@@ -1,0 +1,1 @@
+API_KEY = "http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=8aabb380bfcc835c12bc04249747518f"
